@@ -22,7 +22,7 @@ const object = [
     firstname: "Berny",
     lastname: "Keszthelyi",
     age: 3,
-    salaray: 0,
+    salary: 0,
     athome: false,
   },
 ];
@@ -30,6 +30,7 @@ const object = [
 const firstnameUl = document.querySelector(".firstname-ul");
 const infoUl = document.querySelector(".info-ul");
 const selectorBtn = document.querySelectorAll(".selector-btn");
+const addBtn = document.querySelector('.addperson-btn');
 
 
 addEventListener('DOMContentLoaded', loadOBJ);
@@ -65,3 +66,47 @@ selectorBtn.forEach((btn) => {
   });
   
 });
+
+function CreatePerson(firstname, lastname, age, salary, athome) {
+
+  this.id = object.length-1;
+  this.firstname = firstname;
+  this.lastname = lastname;
+  this.age = age;
+  this.salary = salary;
+  this.athome = athome;
+
+};
+
+
+//* get form inputs
+addBtn.addEventListener('click', addPerson);
+
+//* get form inputs
+const firstName = document.querySelector('#firstname');
+const lastName = document.querySelector('#lastname');
+const page = document.querySelector('#age');
+const salary = document.querySelector('#salary');
+const athome = document.querySelector('#athome');
+
+function addPerson() {
+
+  const personFirstname = firstName.value;
+  const personLastname = lastName.value;
+  const personAge = Number(page.value);
+  const personSalary = Number(salary.value);
+  const personAthome = athome.checked;
+
+  firstName.value = "";
+  lastName.value = "";
+  page.value = "";
+  salary.value = "";
+  athome.checked = false;
+
+  const newPerson = new CreatePerson(personFirstname, personLastname, personAge, personSalary, personAthome);
+  object.push(newPerson);
+
+  loadOBJ();
+  loadInfo("lastname");
+
+}
